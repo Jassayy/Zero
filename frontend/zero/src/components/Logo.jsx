@@ -1,15 +1,12 @@
-// import React from "react";
+import React from "react";
+import logo from "../assets/logo.png";
 
-// function Logo() {
-//   return (
-//     <div>
-//       <img
-//         src="https://w7.pngwing.com/pngs/918/295/png-transparent-nice-systems-ltd-nice-actimize-business-nasdaq-nice-business-text-people-logo.png"
-//         alt="logo"
-//         className="h-20 w-20 object-contain"
-//       />
-//     </div>
-//   );
-// }
+function Logo() {
+  return (
+    <div className="h-full flex items-center">
+      <img src={logo} alt="logo" className="max-h-16 object-contain" />
+    </div>
+  );
+}
 
-// export default Logo;
+export default Logo;
