@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import background from "../assets/background.png";
 
 function SignUp() {
   const [username, setUsername] = useState("");

@@ -16,7 +16,7 @@ function Nav() {
   };
 
   return (
-    <nav className="h-16 w-full bg-slate-50 text-black dark:bg-transparent dark:text-slate-400 flex shadow-2xl items-center justify-center p-6 z-50 relative">
+    <nav className="h-16 w-full bg-slate-50 text-black dark:bg-transparent dark:text-slate-400 flex shadow-xl items-center justify-center p-6 z-50 relative">
       <div className="mr-auto flex space-x-4">
         <Logo />
       </div>
