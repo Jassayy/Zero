@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import Logo from "./Logo";
 
 function Nav() {
-  const navigate = useNavigate(); // Call useNavigate here only once
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Placeholder for authentication status
 
   const handleSignIn = () => {
     navigate("/sign-in");
@@ -15,7 +16,7 @@ function Nav() {
   };
 
   return (
-    <nav className="h-16 w-full bg-slate-50 text-black dark:bg-transparent dark:text-slate-400 flex shadow-2xl items-center justify-center p-6">
+    <nav className="h-16 w-full bg-slate-50 text-black dark:bg-transparent dark:text-slate-400 flex shadow-2xl items-center justify-center p-6 z-50 relative">
       <div className="mr-auto flex space-x-4">
         <Logo />
       </div>
@@ -43,8 +44,12 @@ function Nav() {
         </li>
       </ul>
       <div className="ml-auto flex space-x-4">
-        <Button onClick={handleSignIn}>Sign-in</Button>
-        <Button onClick={handleLogin}>Login</Button>
+        {!isLoggedIn && (
+          <>
+            <Button onClick={handleSignIn}>Sign-in</Button>
+            <Button onClick={handleLogin}>Login</Button>
+          </>
+        )}
       </div>
     </nav>
   );
