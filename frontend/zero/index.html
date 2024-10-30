@@ -2,13 +2,39 @@
 <html lang="en" class="">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="..." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Zero</title>
+    
+    <!-- Add this style in the head -->
+    <style>
+      .circular-text {
+        animation: rotate 20s linear infinite;
+      }
+      
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
-  <body
-    class="dark:bg-gradient-to-l dark:from-black dark:via-slate-800 dark:to-black"
-  >
+  <body class="dark:bg-gradient-to-l dark:from-black dark:via-slate-800 dark:to-black">
+    <!-- Add this div right after body opening tag -->
+    <div class="fixed bottom-8 right-8 w-32 h-32 z-50 ">
+      <svg viewBox="0 0 100 100" class="circular-text w-full h-full text-blue-600 dark:text-blue-400">
+        <path id="curve" d="M 50 50 m -37 0 a 37 37 0 1 1 74 0 a 37 37 0 1 1 -74 0" fill="transparent"/>
+        <text class="dark:text-white">
+          <textPath href="#curve" textLength="230">
+            • Thanks for visiting • Thanks for visiting 
+          </textPath>
+        </text>
+      </svg>
+    </div>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
