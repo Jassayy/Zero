@@ -12,6 +12,7 @@ import Docs from "./pages/Docs";
 import GetStarted from "./pages/GetStarted";
 import Features from "./pages/Features";
 import Careers from "./pages/Careers";
+import PaymentGateways from "./pages/PaymentGateways";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/features" element={<Features />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/payment" element={<PaymentGateways />} />
         </Routes>
         <Footer />
       </Router>
