@@ -1,10 +1,14 @@
 // Landing.js
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Landing() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const cards = document.querySelectorAll('.glow-card');
     
+    // Mouse move effect
     cards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -15,6 +19,23 @@ function Landing() {
         card.style.setProperty('--mouse-y', `${y}px`);
       });
     });
+
+    // Scroll animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-slide-up');
+          entry.target.classList.add('opacity-100');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => {
+      card.classList.add('opacity-0');
+      observer.observe(card);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -38,7 +59,9 @@ function Landing() {
               Your gateway to seamless development and innovation. Build, deploy, and scale with confidence.
             </p>
             <div className="flex gap-4 animate-fade-in-delayed">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
+              <button 
+                onClick={() => navigate('/get-started')}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
                 Get Started
               </button>
               <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-gray-800 font-semibold py-3 px-8 rounded-lg transition-colors">
@@ -61,7 +84,7 @@ function Landing() {
             What Our Users Say
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
               <div className="relative z-10">
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   "Zero has transformed our development workflow. The platform's intuitive interface and powerful features have significantly improved our team's productivity."
@@ -76,7 +99,7 @@ function Landing() {
               </div>
             </div>
 
-            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
               <div className="relative z-10">
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   "The deployment process has never been easier. Zero's platform helped us reduce our deployment time by 70%. Absolutely game-changing!"
@@ -91,7 +114,7 @@ function Landing() {
               </div>
             </div>
 
-            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
               <div className="relative z-10">
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   "The support team is exceptional. Any issues we encountered were resolved quickly, and the documentation is comprehensive. Highly recommended!"

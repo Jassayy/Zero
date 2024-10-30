@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 
 function About() {
+  useEffect(() => {
+    const cards = document.querySelectorAll('.glow-card');
+    
+    // Mouse move effect
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // Scroll animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-slide-up');
+          entry.target.classList.add('opacity-100');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => {
+      card.classList.add('opacity-0');
+      observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
       {/* Hero Section */}
@@ -40,84 +73,98 @@ function About() {
 
           {/* Statistics Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 text-center">
-              <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">10M+</div>
-              <div className="text-gray-600 dark:text-gray-300">Active Users</div>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+              <div className="relative z-10">
+                <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">10M+</div>
+                <div className="text-gray-600 dark:text-gray-300">Active Users</div>
+              </div>
             </div>
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 text-center">
-              <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">99.9%</div>
-              <div className="text-gray-600 dark:text-gray-300">Uptime</div>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+              <div className="relative z-10">
+                <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">99.9%</div>
+                <div className="text-gray-600 dark:text-gray-300">Uptime</div>
+              </div>
             </div>
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 text-center">
-              <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">50+</div>
-              <div className="text-gray-600 dark:text-gray-300">Countries</div>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+              <div className="relative z-10">
+                <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">50+</div>
+                <div className="text-gray-600 dark:text-gray-300">Countries</div>
+              </div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Our Mission</h2>
-              <p className="text-gray-600 dark:text-gray-300">
-                To revolutionize the development experience by providing intuitive, powerful tools that allow developers to focus on what matters most - creating amazing software.
-              </p>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+              <div className="relative z-10">
+                <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Our Mission</h2>
+                <p className="text-gray-600 dark:text-gray-300">
+                  To revolutionize the development experience by providing intuitive, powerful tools that allow developers to focus on what matters most - creating amazing software.
+                </p>
+              </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Our Vision</h2>
-              <p className="text-gray-600 dark:text-gray-300">
-                To become the go-to platform for developers worldwide, setting new standards in development workflow efficiency and collaboration.
-              </p>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+              <div className="relative z-10">
+                <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Our Vision</h2>
+                <p className="text-gray-600 dark:text-gray-300">
+                  To become the go-to platform for developers worldwide, setting new standards in development workflow efficiency and collaboration.
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 mb-12">
-            <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">Why Choose Zero?</h2>
-            <div className="space-y-4">
-              <div className="flex items-start">
-                <div className="flex-shrink-0 w-6 h-6 mt-1 mr-4 text-blue-600">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
+          <div className="glow-card relative bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+            <div className="relative z-10">
+              <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">Why Choose Zero?</h2>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 w-6 h-6 mt-1 mr-4 text-blue-600">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300">Streamlined deployment process with one-click solutions</p>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300">Streamlined deployment process with one-click solutions</p>
-              </div>
-              <div className="flex items-start">
-                <div className="flex-shrink-0 w-6 h-6 mt-1 mr-4 text-blue-600">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 w-6 h-6 mt-1 mr-4 text-blue-600">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300">Robust security features to protect your applications</p>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300">Robust security features to protect your applications</p>
-              </div>
-              <div className="flex items-start">
-                <div className="flex-shrink-0 w-6 h-6 mt-1 mr-4 text-blue-600">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 w-6 h-6 mt-1 mr-4 text-blue-600">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300">24/7 expert support to help you every step of the way</p>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300">24/7 expert support to help you every step of the way</p>
               </div>
             </div>
           </div>
 
           {/* Team Section */}
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300">
-            <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white text-center">Meet Our Team</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="flex flex-col items-center">
-                <div className="w-32 h-32 rounded-full bg-gray-300 mb-4"></div>
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white">John Doe</h3>
-                <p className="text-gray-600 dark:text-gray-400">CEO & Founder</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-32 h-32 rounded-full bg-gray-300 mb-4"></div>
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Jane Smith</h3>
-                <p className="text-gray-600 dark:text-gray-400">CTO</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-32 h-32 rounded-full bg-gray-300 mb-4"></div>
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Mike Johnson</h3>
-                <p className="text-gray-600 dark:text-gray-400">Lead Developer</p>
+          <div className="glow-card relative bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+            <div className="relative z-10">
+              <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white text-center">Meet Our Team</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="flex flex-col items-center">
+                  <div className="w-32 h-32 rounded-full bg-gray-300 mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">John Doe</h3>
+                  <p className="text-gray-600 dark:text-gray-400">CEO & Founder</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-32 h-32 rounded-full bg-gray-300 mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Jane Smith</h3>
+                  <p className="text-gray-600 dark:text-gray-400">CTO</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-32 h-32 rounded-full bg-gray-300 mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Mike Johnson</h3>
+                  <p className="text-gray-600 dark:text-gray-400">Lead Developer</p>
+                </div>
               </div>
             </div>
           </div>

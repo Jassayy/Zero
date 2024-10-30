@@ -1,6 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function Docs() {
+  useEffect(() => {
+    const cards = document.querySelectorAll('.glow-card');
+    
+    // Mouse move effect
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // Scroll animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-slide-up');
+          entry.target.classList.add('opacity-100');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => {
+      card.classList.add('opacity-0');
+      observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="relative overflow-hidden bg-gradient-to-b from-blue-500/10 to-transparent dark:from-blue-900/20">
@@ -10,55 +43,63 @@ function Docs() {
           </h1>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 cursor-pointer">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">The Future of Development</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Exploring upcoming trends in software development and how Zero is positioned to embrace these changes.
-              </p>
-              <div className="flex justify-between items-center">
-                <button className="text-blue-600 hover:text-blue-700 font-medium">Read more →</button>
-                <span className="text-sm text-gray-500">June 15, 2023</span>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+              <div className="relative z-10">
+                <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">The Future of Development</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  Exploring upcoming trends in software development and how Zero is positioned to embrace these changes.
+                </p>
+                <div className="flex justify-between items-center">
+                  <button className="text-blue-600 hover:text-blue-700 font-medium">Read more →</button>
+                  <span className="text-sm text-gray-500">June 15, 2023</span>
+                </div>
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 cursor-pointer">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Building Scalable Systems</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Best practices and insights on creating robust, scalable applications in today's cloud environment.
-              </p>
-              <div className="flex justify-between items-center">
-                <button className="text-blue-600 hover:text-blue-700 font-medium">Read more →</button>
-                <span className="text-sm text-gray-500">June 10, 2023</span>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+              <div className="relative z-10">
+                <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Building Scalable Systems</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  Best practices and insights on creating robust, scalable applications in today's cloud environment.
+                </p>
+                <div className="flex justify-between items-center">
+                  <button className="text-blue-600 hover:text-blue-700 font-medium">Read more →</button>
+                  <span className="text-sm text-gray-500">June 10, 2023</span>
+                </div>
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 cursor-pointer">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">DevOps Evolution</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                How DevOps practices have evolved and what it means for modern development teams.
-              </p>
-              <div className="flex justify-between items-center">
-                <button className="text-blue-600 hover:text-blue-700 font-medium">Read more →</button>
-                <span className="text-sm text-gray-500">June 5, 2023</span>
+            <div className="glow-card relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+              <div className="relative z-10">
+                <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">DevOps Evolution</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  How DevOps practices have evolved and what it means for modern development teams.
+                </p>
+                <div className="flex justify-between items-center">
+                  <button className="text-blue-600 hover:text-blue-700 font-medium">Read more →</button>
+                  <span className="text-sm text-gray-500">June 5, 2023</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-12 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300">
-            <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">Featured Posts</h2>
-            <div className="space-y-4">
-              {[1, 2, 3].map((item) => (
-                <div key={item} className="border-b dark:border-gray-700 pb-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 cursor-pointer">
-                  <h3 className="text-lg font-medium text-gray-800 dark:text-white">
-                    {item === 1 && "Cloud Native Architecture Patterns"}
-                    {item === 2 && "Microservices vs Monoliths"}
-                    {item === 3 && "The Rise of Serverless"}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    In-depth analysis and practical insights from our engineering team.
-                  </p>
-                </div>
-              ))}
+          <div className="mt-12 glow-card relative bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg before:absolute before:w-[200px] before:h-[200px] before:bg-blue-500/20 before:rounded-full before:blur-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:z-0 before:pointer-events-none transform transition-all duration-700" style={{"--mouse-x": "0px", "--mouse-y": "0px", "--before-left": "var(--mouse-x)", "--before-top": "var(--mouse-y)"}}>
+            <div className="relative z-10">
+              <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">Featured Posts</h2>
+              <div className="space-y-4">
+                {[1, 2, 3].map((item) => (
+                  <div key={item} className="border-b dark:border-gray-700 pb-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 cursor-pointer">
+                    <h3 className="text-lg font-medium text-gray-800 dark:text-white">
+                      {item === 1 && "Cloud Native Architecture Patterns"}
+                      {item === 2 && "Microservices vs Monoliths"}
+                      {item === 3 && "The Rise of Serverless"}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      In-depth analysis and practical insights from our engineering team.
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
