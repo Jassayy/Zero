@@ -5,8 +5,9 @@ import Logo from "./Logo";
 
 function Nav() {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Placeholder for authentication status
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -28,37 +29,50 @@ function Nav() {
     setIsDarkMode(!isDarkMode);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className="h-16 w-full bg-slate-50 text-black dark:bg-transparent dark:text-slate-400 flex shadow-xl items-center justify-center p-6 z-50 relative">
-      <div className="mr-auto flex space-x-4">
+    <nav className="h-auto md:h-16 w-full bg-slate-50 text-black dark:bg-transparent dark:text-slate-400 flex flex-wrap md:flex-nowrap shadow-xl items-center justify-between p-4 md:p-6 z-50 relative">
+      <div className="flex items-center justify-between w-full md:w-auto">
         <Link to="/">
           <Logo />
         </Link>
+        <button
+          onClick={toggleMenu}
+          className="md:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+          </svg>
+        </button>
       </div>
 
-      <ul className="flex space-x-32">
+      <ul className={`${isMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row w-full md:w-auto space-y-4 md:space-y-0 md:space-x-8 lg:space-x-32 mt-4 md:mt-0`}>
         <li>
-          <Link to="/" className="hover:text-gray-500 transition duration-200">
+          <Link to="/" className="block hover:text-gray-500 transition duration-200">
             Home
           </Link>
         </li>
         <li>
-          <Link to="/about" className="hover:text-gray-500 transition duration-200">
+          <Link to="/about" className="block hover:text-gray-500 transition duration-200">
             About
           </Link>
         </li>
         <li>
-          <Link to="/blogs" className="hover:text-gray-500 transition duration-200">
+          <Link to="/blogs" className="block hover:text-gray-500 transition duration-200">
             Blogs
           </Link>
         </li>
         <li>
-          <Link to="/pricing" className="hover:text-gray-500 transition duration-200">
+          <Link to="/pricing" className="block hover:text-gray-500 transition duration-200">
             Pricing
           </Link>
         </li>
       </ul>
-      <div className="ml-auto flex space-x-4 items-center">
+
+      <div className={`${isMenuOpen ? 'flex' : 'hidden'} md:flex items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto mt-4 md:mt-0 flex-col md:flex-row`}>
         <button
           onClick={toggleDarkMode}
           className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-200"
@@ -74,10 +88,10 @@ function Nav() {
           )}
         </button>
         {!isLoggedIn && (
-          <>
+          <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
             <Button onClick={handleSignIn} className="hover:scale-105 transition duration-200">Sign-in</Button>
             <Button onClick={handleLogin} className="hover:scale-105 transition duration-200">Login</Button>
-          </>
+          </div>
         )}
       </div>
     </nav>
