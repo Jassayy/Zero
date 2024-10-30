@@ -2,32 +2,45 @@ import React, { useEffect, useState } from "react";
 import Button from "../components/Button";
 
 function Docs() {
-  const [blogs, setBlogs] = useState([
-    {
-      id: 1,
-      title: "The Future of Development",
-      content: "Exploring upcoming trends in software development and how Zero is positioned to embrace these changes.",
-      date: "June 15, 2023"
-    },
-    {
-      id: 2, 
-      title: "Building Scalable Systems",
-      content: "Best practices and insights on creating robust, scalable applications in today's cloud environment.",
-      date: "June 10, 2023"
-    },
-    {
-      id: 3,
-      title: "DevOps Evolution",
-      content: "How DevOps practices have evolved and what it means for modern development teams.",
-      date: "June 5, 2023"
+  const [blogs, setBlogs] = useState(() => {
+    // Get blogs from localStorage on initial load
+    const savedBlogs = localStorage.getItem('blogs');
+    if (savedBlogs) {
+      return JSON.parse(savedBlogs);
     }
-  ]);
+    // Default blogs if none in localStorage
+    return [
+      {
+        id: 1,
+        title: "The Future of Development",
+        content: "Exploring upcoming trends in software development and how Zero is positioned to embrace these changes.",
+        date: "June 15, 2023"
+      },
+      {
+        id: 2, 
+        title: "Building Scalable Systems",
+        content: "Best practices and insights on creating robust, scalable applications in today's cloud environment.",
+        date: "June 10, 2023"
+      },
+      {
+        id: 3,
+        title: "DevOps Evolution",
+        content: "How DevOps practices have evolved and what it means for modern development teams.",
+        date: "June 5, 2023"
+      }
+    ];
+  });
 
   const [showAddForm, setShowAddForm] = useState(false);
   const [newBlog, setNewBlog] = useState({
     title: '',
     content: ''
   });
+
+  // Save blogs to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('blogs', JSON.stringify(blogs));
+  }, [blogs]);
 
   useEffect(() => {
     const cards = document.querySelectorAll('.glow-card');
